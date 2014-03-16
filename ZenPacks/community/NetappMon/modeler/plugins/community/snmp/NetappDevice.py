@@ -1,10 +1,6 @@
-from Products.DataCollector.plugins.CollectorPlugin \
-    import SnmpPlugin, GetMap, GetTableMap
-
-# Classes we'll need for returning proper results from our modeler plugin's
-# process method.
-from Products.DataCollector.plugins.DataMaps import ObjectMap
-
+from Products.DataCollector.plugins.CollectorPlugin import SnmpPlugin, GetMap
+from Products.DataCollector.plugins.DataMaps import MultiArgs
+import re
 
 class NetappDevice(SnmpPlugin):
     """Map mib elements from Nortel mib to get hw and os products.
