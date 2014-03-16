@@ -7,10 +7,21 @@ from Products.ZenRelations.RelSchema import ToManyCont, ToOne
 class NetappAggre(DeviceComponent, ManagedEntity):
     meta_type = portal_type = "NetappAggre"
 
-    name = ''
-
+    aggrname = ''
+    aggrState = ''
+    aggrRaidType = ''
+    aggrOwners = ''
+    aggrFlexvollist = ''
+    aggrOptions = ''
+    
+    
     _properties = ManagedEntity._properties + (
-        {'id': 'name', 'type': 'string', 'mode': ''},
+        {'id': 'aggrname', 'type': 'string', 'mode': ''},
+        {'id': 'aggrState', 'type': 'string', 'mode': ''},
+        {'id': 'aggrRaidType', 'type': 'string', 'mode': ''},
+        {'id': 'aggrOwners', 'type': 'string', 'mode': ''},
+        {'id': 'aggrFlexvollist', 'type': 'string', 'mode': ''},
+        {'id': 'aggrOptions', 'type': 'string', 'mode': ''},
     )
 
     _relations = ManagedEntity._relations + (

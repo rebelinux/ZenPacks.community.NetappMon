@@ -25,21 +25,11 @@ else:
     MultiLineText = schema.TextLine
 
 
-class IExampleDataSourceInfo(IRRDDataSourceInfo):
-    """
-    Defines what fields should be displayed on the edit dialog for this
-    datasource in the Zenoss web interface.
-    """
+class INetappAggreInfo(IComponentInfo):
+    aggrname = schema.Int(title=_t(u"Name"))
+    aggrState = SingleLineText(title=_t(u"Status"))
+    aggrRaidType = SingleLineText(title=_t(u"Raid Type"))
+    aggrOwners = SingleLineText(title=_t(u"Owner"))
+    aggrFlexvollist = SingleLineText(title=_t(u"Member Volumes"))
+    aggrOptions = SingleLineText(title=_t(u"Options"))
 
-    # We inherit common datasource fields like event class, severity and others
-    # from IRRDDataSourceInfo.
-
-    exampleProperty = SingleLineText(
-        title=_t(u'Example Property'),
-        group=_t(u'Example Protocol'),
-        )
-
-
-class IExampleComponentInfo(IComponentInfo):
-    attributeOne = schema.Int(title=_t(u"Attribute #1"))
-    attributeTwo = SingleLineText(title=_t(u"Attribute #2"))
