@@ -3,15 +3,15 @@ from Products.DataCollector.plugins.DataMaps import MultiArgs
 import re
 
 class NetappDevice(SnmpPlugin):
-    """Map mib elements from Nortel mib to get hw and os products.
+    """Map mib elements from Netapp mib to get hw and os products.
     """
 
     maptype = "NetappDevice"
 
     snmpGetMap = GetMap({
-        '.1.3.6.1.4.1.789.1.1.9' : 'setHWSerialNumber',
-        '.1.3.6.1.4.1.789.1.1.5' : 'setHWProductKey',
-        '.1.3.6.1.4.1.789.1.1.2' : 'setOSProductKey',
+        '.1.3.6.1.4.1.789.1.1.9.0' : 'setHWSerialNumber',
+        '.1.3.6.1.4.1.789.1.1.5.0' : 'setHWProductKey',
+        '.1.3.6.1.4.1.789.1.1.2.0' : 'setOSProductKey',
         })
 
 
