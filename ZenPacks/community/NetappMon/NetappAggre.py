@@ -2,6 +2,7 @@ from Products.ZenModel.DeviceComponent import DeviceComponent
 from Products.ZenModel.ManagedEntity import ManagedEntity
 from Products.ZenModel.ZenossSecurity import ZEN_CHANGE_DEVICE
 from Products.ZenRelations.RelSchema import ToManyCont, ToOne
+from Globals import InitializeClass
 
 
 class NetappAggre(DeviceComponent, ManagedEntity):
@@ -25,8 +26,8 @@ class NetappAggre(DeviceComponent, ManagedEntity):
     )
 
     _relations = ManagedEntity._relations + (
-        ('NetappDevice', ToOne(ToManyCont,
-            'ZenPacks.community.NetappMon.NetappAggre',
+        ('NetappDevAggre', ToOne(ToManyCont,
+            'ZenPacks.community.NetappMon.NetappDevice',
             'NetappAggre',
             ),
         ),
@@ -45,5 +46,34 @@ class NetappAggre(DeviceComponent, ManagedEntity):
 
     # Custom components must always implement the device method. The method
     # should return the device object that contains the component.
+    def viewName(self):
+        """Pretty version human readable version of this object"""
+        return self.id
+
+    titleOrId = name = viewName
+
+
     def device(self):
-        return self.NetappDevice()
+        return self.NortelDevPower()
+
+    def manage_deleteComponent(self, REQUEST=None):
+        """Delete NetappAggre component takes from Jane Curry"""
+        url = None
+        if REQUEST is not None:
+            url = self.device().NetappAggre.absolute_url()
+        self.getPrimaryParent()._delObject(self.id)
+
+        if REQUEST is not None:
+            REQUEST['RESPONSE'].redirect(url)
+
+    def getRRDTemplates(self):
+        """
+        Return the RRD Templates list
+        """
+        templates = []
+        for tname in [self.__class__.__name__]:
+            templ = self.getRRDTemplateByName(tname)
+            if templ: templates.append(templ)
+        return templates
+    
+InitializeClass(NetappAggre)

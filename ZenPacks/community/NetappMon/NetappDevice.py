@@ -1,5 +1,6 @@
 from Products.ZenModel.Device import Device
 from Products.ZenRelations.RelSchema import ToManyCont, ToOne
+from Globals import InitializeClass
 
 
 class NetappDevice(Device):
@@ -22,7 +23,8 @@ class NetappDevice(Device):
     _relations = Device._relations + (
         ('NetappAggre', ToManyCont(ToOne,
             'ZenPacks.community.NetappMon.NetappAggre',
-            'NetappDevice',
+            'NetappDevAggre',
             ),
         ),
     )
+InitializeClass(NetappDevice)
