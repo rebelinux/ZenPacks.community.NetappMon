@@ -3,15 +3,15 @@ import binascii, re
 class NetappAggreMap(SnmpPlugin):
     """Map class NetappAggreMap to model."""
     maptype = "NetappAggreMap"
-    modname = "ZenPacks.community.NetappMon.NetappAggreMap"
-    relname = "NetappAggreMap"
+    modname = "ZenPacks.community.NetappMon.NetappAggre"
+    relname = "NetappAggre"
     
 
     snmpGetTableMaps = (
         GetTableMap('aggre',
         '.1.3.6.1',
                     {
-                        '.4.1.789.1.5.11.1.1.0': 'aggreindex',
+                        '.4.1.789.1.5.11.1.1': 'aggreindex',
                         '.4.1.789.1.5.11.1.2': 'aggrname',
                         '.4.1.789.1.5.11.1.5': 'aggrState',
                         '.4.1.789.1.5.11.1.10': 'aggrRaidType',

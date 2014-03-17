@@ -13,21 +13,21 @@ var ZC = Ext.ns('Zenoss.component');
  * custom component class. Second parameter is the singular form of the
  * friendly name to be displayed in the UI. Third parameter is the plural form.
  */
-ZC.registerName('ExampleComponent', _t('Example'), _t('Examples'));
+ZC.registerName('NetappAggre', _t('Aggregate'), _t('Aggregates'));
 
 
 /*
  * Custom component grid panel. This controls the grid that gets displayed for
  * components of the type set in "componenType".
  */
-Ext.define('Zenoss.component.ExampleComponentGridPanel',{
+Ext.define('Zenoss.component.NetappAggreGridPanel',{
     extend: 'Zenoss.component.ComponentGridPanel',
     subComponentGridPanel: false,
 
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
-            componentType: 'ExampleComponent',
-            alias:['widget.ExampleComponentGridPanel'],
+            componentType: 'NetappAggre',
+            alias:['widget.NetappAggreGridPanel'],
             sortInfo: {
                 field: 'name',
                 direction: 'ASC'
@@ -37,8 +37,9 @@ Ext.define('Zenoss.component.ExampleComponentGridPanel',{
                 {name: 'name'},
                 {name: 'severity'},
                 {name: 'usesMonitorAttribute'},
-                {name: 'attributeOne'},
-                {name: 'attributeTwo'},
+                {name: 'aggrname'},
+                {name: 'aggrState'},
+                {name: 'aggrRaidType'},
                 {name: 'monitor'},
                 {name: 'monitored'}
             ],
@@ -52,17 +53,17 @@ Ext.define('Zenoss.component.ExampleComponentGridPanel',{
             },{
                 id: 'name',
                 flex: 1,
-                dataIndex: 'name',
+                dataIndex: 'aggrname',
                 header: _t('Name')
             },{
-                id: 'attributeOne',
-                dataIndex: 'attributeOne',
-                header: _t('Attribute #1'),
+                id: 'aggrState',
+                dataIndex: 'aggrState',
+                header: _t('Status'),
                 sortable: true,
                 width: 70
             },{
-                id: 'attributeTwo',
-                dataIndex: 'attributeTwo',
+                id: 'aggrRaidType',
+                dataIndex: 'aggrRaidType',
                 header: _t('Attribute #2'),
                 sortable: true,
                 width: 70
