@@ -1,84 +1,78 @@
-/*
- * Based on the configuration in ../../configure.zcml this JavaScript will only
- * be loaded when the user is looking at an ExampleDevice in the web interface.
- */
-
 (function(){
 
 var ZC = Ext.ns('Zenoss.component');
 
+function render_link(ob) {
+    if (ob && ob.uid) {
+        return Zenoss.render.link(ob.uid);
+    } else {
+        return ob;
+    }
+}
 
-/*
- * Friendly names for the components. First parameter is the meta_type in your
- * custom component class. Second parameter is the singular form of the
- * friendly name to be displayed in the UI. Third parameter is the plural form.
- */
-ZC.registerName('NetappAggre', _t('Aggregate'), _t('Aggregates'));
-
-
-/*
- * Custom component grid panel. This controls the grid that gets displayed for
- * components of the type set in "componenType".
- */
-Ext.define('Zenoss.component.NetappAggreGridPanel',{
-    extend: 'Zenoss.component.ComponentGridPanel',
+ZC.NetappAggrePanel = Ext.extend(ZC.ComponentGridPanel, {
     subComponentGridPanel: false,
-
     constructor: function(config) {
         config = Ext.applyIf(config||{}, {
             componentType: 'NetappAggre',
-            alias:['widget.NetappAggreGridPanel'],
-            sortInfo: {
-                field: 'name',
-                direction: 'ASC'
-            },
+            autoExpandColumn: 'aggrFlexvollist',
             fields: [
                 {name: 'uid'},
-                {name: 'name'},
                 {name: 'severity'},
+                {name: 'name'},
+                {name: 'status'},
                 {name: 'usesMonitorAttribute'},
-                {name: 'aggrname'},
-                {name: 'aggrState'},
-                {name: 'aggrRaidType'},
+                {name: 'monitored'},
                 {name: 'monitor'},
-                {name: 'monitored'}
+                {name: 'aggrState'},
+                {name: 'aggrOwners'},
+                {name: 'aggrFlexvollist'},
+                {name: 'locking'},
             ],
             columns: [{
                 id: 'severity',
                 dataIndex: 'severity',
                 header: _t('Events'),
                 renderer: Zenoss.render.severity,
-                sortable: true,
-                width: 50
+                width: 60,
             },{
                 id: 'name',
-                flex: 1,
                 dataIndex: 'name',
-                header: _t('Name')
+                header: _t('Name'),
+                width: 180,
             },{
-                id: 'aggrState',
-                dataIndex: 'aggrState',
-                header: _t('Status'),
+                id: 'aggrFlexvollist',
+                dataIndex: 'aggrFlexvollist',
+                header: _t('Member Volumes'),
                 sortable: true,
-                width: 70
             },{
-                id: 'aggrRaidType',
-                dataIndex: 'aggrRaidType',
-                header: _t('Attribute #2'),
+
+                id: 'aggrOwners',
+                dataIndex: 'aggrOwners',
+                header: _t('Owner'),
                 sortable: true,
-                width: 70
+            },{
+            	 id: 'aggrState',
+                 dataIndex: 'aggrState',
+                 header: _t('Status'),
+                 sortable: true,
+                 width: 120,
             },{
                 id: 'monitored',
                 dataIndex: 'monitored',
                 header: _t('Monitored'),
-                renderer: Zenoss.render.checkbox,
-                sortable: true,
-                width: 65
+            },{ 
+                id: 'locking',
+                dataIndex: 'locking',
+                header: _t('Locking'),
+                width: 72,
+                renderer: Zenoss.render.locking_icons,
             }]
         });
-        this.callParent([config]);
+        ZC.NetappAggrePanel.superclass.constructor.call(this, config);
     }
 });
 
-
+Ext.reg('NetappAggrePanel', ZC.NetappAggrePanel);
+ZC.registerName('NetappAggre', _t('Aggregate'), _t('Aggregates'));
 })();
