@@ -53,7 +53,7 @@ Ext.define('Zenoss.component.NetappAggreGridPanel',{
             },{
                 id: 'name',
                 flex: 1,
-                dataIndex: 'aggrname',
+                dataIndex: 'name',
                 header: _t('Name')
             },{
                 id: 'aggrState',
