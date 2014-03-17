@@ -54,7 +54,7 @@ class NetappAggre(DeviceComponent, ManagedEntity):
 
 
     def device(self):
-        return self.NortelDevPower()
+        return self.NetappDevAggre()
 
     def manage_deleteComponent(self, REQUEST=None):
         """Delete NetappAggre component takes from Jane Curry"""
